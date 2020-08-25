@@ -49,23 +49,11 @@ def find_tfl_lights(c_image: np.ndarray, **kwargs):
     y_green = [c_image.shape[0] / 2 - 100] * len(x)
 
     """
-
-    # src = cv2.imread(c_image, cv2.IMREAD_UNCHANGED)
-
-    # red_channel = c_image[:, :, 2]
-    # green_channel = c_image[:, :, 1]
-    # cv2.imwrite(c_image, red_channel)
-    # plt.imshow(green_channel)
-    # print(red_channel[367:385][868:888])
-    # print(green_channel[367:385][868:888])
     ker = plt.imread('C:/Users/rent/PycharmProjects/project/mobileye/kernel.png')
     gray_ker = cv2.cvtColor(ker, cv2.COLOR_BGR2GRAY)
     gray_image = cv2.cvtColor(c_image, cv2.COLOR_BGR2GRAY)
     kernel = np.ones((3, 3)) / 9
     kernel[1, 1] = 8 / 9
-
-    """kernel = np.array(
-        [[1/9, 1/9, 1/9], [1/9, 1/9, 1/9], [1/9, 1/9, 1/9]])  # create first central finite difference kernel"""
     pdx = sg.convolve2d(gray_image, kernel, "same")
     plt.imshow(c_image)
 
@@ -87,18 +75,6 @@ def find_tfl_lights(c_image: np.ndarray, **kwargs):
 
 def show_image_and_gt(image, objs, fig_num=None):
     plt.figure(fig_num).clf()
-    # plt.imshow(image)
-    # im2 = Pillow.ImageOps.greyscale(image)
-    # im2.show()
-
-    # labels = set()
-    # if objs is not None:
-    #     for o in objs:
-    #         poly = np.array(o['polygon'])[list(np.arange(len(o['polygon']))) + [0]]
-    #         plt.plot(poly[:, 0], poly[:, 1], 'r', label=o['label'])
-    #         labels.add(o['label'])
-    #     if len(labels) > 1:
-    #         plt.legend()
 
 
 def test_find_tfl_lights(image_path, json_path=None, fig_num=None):
